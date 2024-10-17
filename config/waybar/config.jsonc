@@ -1,0 +1,92 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "height": 34, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 2, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/launcher",
+        "disk",
+        "memory",
+        "cpu",
+        "clock",
+        "hyprland/workspaces",
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "network",
+        // "power-profiles-daemon",
+        "pulseaudio",
+        "backlight",
+        "battery",
+    ],
+    // Modules configuration
+    "custom/launcher": {
+        "format": "    NixOS",
+        "on-click": "wofi --show drun -I -a -n -W 750 -H 500 -s ~/.config/wofi/themes/gruvbox.css",
+        "on-click-right": "wofi --show run -I -a -n -W 750 500 -s ~/.config.wofi.themes/gruvbox.css"
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+    },
+    // "idle_inhibitor": {
+    //     "format": "{icon}",
+    //     "format-icons": {
+    //         "activated": "",
+    //         "deactivated": ""
+    //     }
+    // },
+    "clock": {
+        "format": "   {:%H:%M}",
+        "format-alt": "󰭧  {:%d-%m-%Y}",
+        "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "cpu": {
+        "format": "  {usage}%",
+    },
+    "memory": {
+        "format": "   {}%"
+    },
+    "disk": {
+        "format": "  {}%",
+        "path": "/"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% 󰂏",
+        "format-charging": "{capacity}% 󱐋",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid}  ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀 ",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "Disconnected  ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% ",
+        "format-muted": "{volume}%  ",
+        "on-click": "pavucontrol"
+    },
+}
